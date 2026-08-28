@@ -1,0 +1,29 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# Кеш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Файлы IDE
+.idea/
+.vscode/
+*.iml
+
+# Логи и базы данных
+*.log
+*.sqlite3
+*.db
+
+# Файлы окружения (секреты)
+.env
+*.env
+
+# Системные папки
+.DS_Store
+Thumbs.db
