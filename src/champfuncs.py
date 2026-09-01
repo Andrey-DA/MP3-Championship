@@ -1,5 +1,5 @@
 import pandas as pd
-from filefuncs import getRecursiveFileList
+from src.filefuncs import getRecursiveFileList
 from mutagen.mp3 import MP3
 import os
 from mutagen.mp3 import MP3
@@ -70,14 +70,14 @@ def play_random_num_seconds_pygame(file_path,num_seconds=5):
         
         # get ranfod track num_seconds interval
         if duration <= num_seconds:
-            print(f"Файл короче {num_seconds} секунд ({duration:.1f} сек), проигрываем полностью")
+            print(f"File is shorter than {num_seconds} seconds ({duration:.1f} sec), playing full length")
             start_time = 0
             play_duration = duration
         else:
             max_start = duration - num_seconds
             start_time = random.uniform(0, max_start)
             play_duration = num_seconds
-            print(f"Проигрываем отрезок: {start_time:.1f} - {start_time + num_seconds:.1f} секунд")
+            print(f"Playing interval: {start_time:.1f} - {start_time + num_seconds:.1f} seconds")
         
         pygame.mixer.music.load(file_path)          # Loading and playing file
         pygame.mixer.music.play(start=start_time)   # begin playing
@@ -157,6 +157,10 @@ def extract_mp3_metadata(file_path):
             metadata['has_cover_art'] = False
         metadata['score'] = 0
         metadata['times_played'] = 0
+        metadata['wins'] = 0
+        metadata['loses'] = 0
+        metadata['ties'] = 0
+        metadata['W-L-T'] = ''
         return metadata
         
     except Exception as e:
@@ -219,7 +223,7 @@ def initMp3Champ(musicdir,
 
 
 def LoadMp3Champ(dffilename):
-    df = pd.read_csv(dffilename,sep="|", encoding='utf-8')
+    df = pd.read_csv(dffilename,sep="|", index_col=0,encoding='utf-8')
     df['next_adversary'] = df['next_adversary'].apply(ast.literal_eval)
     print(f"====== Mp3-championship loaded from {dffilename}")
     return df
@@ -251,7 +255,6 @@ def getNextMatch(df):
     min_times_played = df['times_played'].min()
     if min_times_played == len(df)-1:
         return None,min_times_played,None,None
-    # Отбираем строки с этим значением и берем 2 случайных
     result = df[df['times_played'] == min_times_played]
     # df_track1 = result.sample(n=1)
     df_track1 = result.iloc[[0]]

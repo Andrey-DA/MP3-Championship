@@ -33,7 +33,7 @@ class TrackComparator:
         self.show_menu()
         
         # Start listening keyboard...
-        with keyboard.Listener(on_press=self.on_press) as listener:
+        with keyboard.Listener(on_press=self.on_press,suppress=True) as listener:
             while self.running:
                 time.sleep(0.1)  # Little pause
             
