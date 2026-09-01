@@ -12,8 +12,6 @@ if __name__ == "__main__":
     # Default parameters
     num_seconds = 7    
     musicdir = r"tracks/classic"
-    musicdir = r"O:\\Музыка\\HIM\\HIM - 2001 Deep Shadows & Brilliant Highlights\\"
-    musicdir = r"O:\\Музыка\\Король и Шут\\mp3champ\\"
     # Setting parser
     parser = argparse.ArgumentParser(add_help=False)    
     parser.add_argument('-d','--musicdir', default=musicdir,help='Mp3 track directory')
