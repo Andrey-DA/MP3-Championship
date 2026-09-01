@@ -2,7 +2,7 @@ import pandas as pd
 import src.champfuncs as chp
 from src.filefuncs import getLastDirName,isFileExist
 from src.trackcomparator import TrackComparator
-from src.leaderboard import printLeaderBoard
+from leaderboard import printLeaderBoard
 import time
 import argparse
 import sys
