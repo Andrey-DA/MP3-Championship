@@ -1,6 +1,6 @@
 import pandas as pd
 import src.champfuncs as chp
-from src.filefuncs import getLastDirName,isFileExist
+from src.filefuncs import getLastDirName,isFileExist,checkDir
 from src.trackcomparator import TrackComparator
 from leaderboard import printLeaderBoard
 import time
@@ -43,6 +43,7 @@ if __name__ == "__main__":
     time.sleep(0.2)
     ####
     # If we did not find a file with the given name, we create a new one:
+    checkDir('champs')
     if isFileExist(mp3champfilename) is False:
         chp.initMp3Champ(musicdir,mp3champfilename)
     df = chp.LoadMp3Champ(mp3champfilename)
